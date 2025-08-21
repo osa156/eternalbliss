@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EternalBliss - Find Your Perfect Match</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e91e63;
+            --secondary: #9c27b0;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--light);
+        }
+        
+        .logo i {
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--primary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #e91e63, #9c27b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .pricing {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 60px 0;
+            border-radius: 15px;
+            margin: 60px 0;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .price {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .profile-form {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+        }
+        
+        .profile-form h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        
+        .profile-display {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid var(--primary);
+        }
+        
+        .profile-display h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .profile-display p {
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+        
+        .swipe-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .profile-card {
+            background: rgba(0, 0, 0, 0.2);
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .action-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .like-btn {
+            background: var(--success);
+            color: white;
+        }
+        
+        .dislike-btn {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .communication-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .com-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .com-card i {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+                <span>EternalBliss</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Discover</a></li>
+                    <li><a href="#">Matches</a></li>
+                    <li><a href="#">Messages</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Login</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1>Find Your Perfect Match</h1>
+            <p>Join EternalBliss today and connect with thousands of singles looking for meaningful relationships. Advanced matching algorithm, secure messaging, and video calls.</p>
+            <button class="btn btn-primary">Get Started</button>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Smart Matching</h3>
+                <p>Our algorithm finds compatible partners based on your preferences and behavior.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-video"></i>
+                <h3>Video Calls</h3>
+                <p>Connect face-to-face with integrated WebRTC video calling functionality.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Real-time Chat</h3>
+                <p>Message your matches instantly with our secure messaging platform.</p>
+            </div>
+        </section>
+
+        <section class="pricing">
+            <div class="pricing-header">
+                <h2>Subscription Plans</h2>
+                <p>Choose the plan that works best for you</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">Free</div>
+                    <ul>
+                        <li>For Women</li>
+                        <li>Basic Matching</li>
+                        <li>Limited Messages</li>
+                        <li>Profile Creation</li>
+                    </ul>
+                    <button class="btn btn-outline">Select Plan</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Standard</h3>
+                    <div class="price">₦1,500</div>
+                    <ul>
+                        <li>For Men</li>
+                        <li>View 25 Women Profiles</li>
+                        <li>Unlimited Messages</li>
+                        <li>Basic Video Calls</li>
+                    </ul>
+                    <button class="btn btn-primary">Select Plan</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <div class="price">₦3,000 - ₦15,000</div>
+                    <ul>
+                        <li>For Women (Based on Men's Income)</li>
+                        <li>Priority Matching</li>
+                        <li>HD Video Calls</li>
+                        <li>Profile Highlighting</li>
+                    </ul>
+                    <button class="btn btn-primary">Select Plan</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="profile-section">
+            <div class="profile-form">
+                <h2>Create Your Profile</h2>
+                <form id="profileForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" placeholder="Enter your age">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="income">Monthly Income (₦)</label>
+                        <select id="income">
+                            <option value="">Select Income Range</option>
+                            <option value="1500000">₦1.5M</option>
+                            <option value="3000000">₦3M</option>
+                            <option value="6000000">₦6M</option>
+                            <option value="15000000">₦15M</option>
+                            <option value="25000000">₦25M</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" rows="4" placeholder="Tell others about yourself"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Profile Photo</label>
+                        <input type="file" id="photo">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Profile</button>
+                </form>
+            </div>
+            
+            <div class="profile-display">
+                <img src="https://via.placeholder.com/200" alt="Profile" class="profile-pic">
+                <h2>Your Name</h2>
+                <p>28 years old</p>
+                <p>Monthly Income: ₦3,000,000</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis euismod, aliquam lectus eu, gravida eros.</p>
+                <div class="profile-stats">
+                    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                        <div>
+                            <h3>125</h3>
+                            <p>Matches</p>
+                        </div>
+                        <div>
+                            <h3>87</h3>
+                            <p>Likes</p>
+                        </div>
+                        <div>
+                            <h3>42</h3>
+                            <p>Messages</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="swipe-section">
+            <h2>Discover People</h2>
+            <p>Swipe right to like, left to pass</p>
+            
+            <div class="profile-card">
+                <img src="https://via.placeholder.com/300x300" alt="Profile" class="card-img">
+                <div class="card-content">
+                    <h3>Jessica, 26</h3>
+                    <p>Lagos, Nigeria</p>
+                </div>
+            </div>
+            
+            <div class="card-actions">
+                <button class="action-btn dislike-btn"><i class="fas fa-times"></i></button>
+                <button class="action-btn like-btn"><i class="fas fa-heart"></i></button>
+            </div>
+        </section>
+
+        <section class="communication-section">
+            <div class="com-card">
+                <i class="fas fa-comment-dots"></i>
+                <h3>Messaging</h3>
+                <p>Chat in real-time with your matches using our secure messaging platform.</p>
+                <button class="btn btn-outline">Open Messages</button>
+            </div>
+            <div class="com-card">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Voice Calls</h3>
+                <p>Make crystal clear voice calls to your matches without sharing your number.</p>
+                <button class="btn btn-outline">Call Now</button>
+            </div>
+            <div class="com-card">
+                <i class="fas fa-video"></i>
+                <h3>Video Calls</h3>
+                <p>Connect face-to-face with high quality video calls using WebRTC technology.</p>
+                <button class="btn btn-outline">Start Video Call</button>
+            </div>
+        </section>
+
+        <footer>
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+                <span>EternalBliss</span>
+            </div>
+            <p>Find your perfect match and build meaningful connections</p>
+            
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Help Center</a>
+            </div>
+            
+            <p>© 2023 EternalBliss. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple form validation
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profile saved successfully!');
+        });
+
+        // Simulate swipe functionality
+        const likeBtn = document.querySelector('.like-btn');
+        const dislikeBtn = document.querySelector('.dislike-btn');
+        
+        likeBtn.addEventListener('click', function() {
+            alert('You liked this profile!');
+            // In a real app, this would load the next profile
+        });
+        
+        dislikeBtn.addEventListener('click', function() {
+            alert('You passed on this profile.');
+            // In a real app, this would load the next profile
+        });
+
+        // Initialize Paystack with public key
+        const paystackPublicKey = 'pk_live_669ad09183f1ded9229c99297d5d67f539e3c828';
+        console.log('Paystack initialized with key: ', paystackPublicKey);
+    </script>
+</body>
+</html>
